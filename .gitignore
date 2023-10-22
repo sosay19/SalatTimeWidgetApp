@@ -1,0 +1,66 @@
+# Visual Studio files
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+_ReSharper/
+[Tt]humbs.db
+*.dbmdl
+Generated\ Files/
+obj/
+[Bb]in/
+[Ll]og/
+*.i
+*.suo
+*.ntvs*
+*.sln.ide
+*.suo
+*.[Cc]ache
+[Nn]ode_modules/
+[Jj]spm_packages/
+
+# Build output
+bin/
+obj/
+
+# NuGet Packages
+packages/
+*.nupkg
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ReSharper
+_ReSharper/
+*.[Rr]e[Ss]harper
+*.sln.ide
+
+# Temporary files
+[Tt]emp/
+[Oo]bj/
+[Bb]in/
+
+# Visual Studio Code (VSCode)
+.vscode/
+.settings/
+.history/
+
+# Logs and Debugging
+*.log
+*.logxml
+*.nupkg
+*.nuspec
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Node.js
+node_modules/
+jspm_packages/
