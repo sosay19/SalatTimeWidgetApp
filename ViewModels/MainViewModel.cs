@@ -5,21 +5,36 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Management;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+
 
 namespace SalatTimeWidgetApp.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private string _currentBatteryPercentage;
+        public string CurrentBatteryPercentage
+        {
+            get => _currentBatteryPercentage;
+            set
+            {
+                _currentBatteryPercentage = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentBatteryPercentage"));
+            }
+        }
 
         public MainViewModel()
         {
+            BatteryPercentageProvider batteryPercentageProvider = new BatteryPercentageProvider();
+            Console.WriteLine(batteryPercentageProvider.GetBatteryPercentage());
             var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             timer.Tick += async (sender, args) =>
             {
                 CurrentTime = DateTime.Now.ToString("HH:mm:ss - dd ddd MMM");
+                CurrentBatteryPercentage = "Battery percentage: " + batteryPercentageProvider.GetBatteryPercentage().ToString() + "%";
                 // For debugging: Output the time of the timer tick
                 Console.WriteLine("Timer Tick: " + CurrentTime);
 
@@ -27,7 +42,9 @@ namespace SalatTimeWidgetApp.ViewModels
                 await UpdateSalatTimesAsync("Brussels", "Belgium", 9);
             };
             timer.Start();
+
         }
+
         private ObservableCollection<SalatTimeItem> _salatTimes = new ObservableCollection<SalatTimeItem>();
         public ObservableCollection<SalatTimeItem> SalatTimes
         {
@@ -113,7 +130,7 @@ namespace SalatTimeWidgetApp.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentTime"));
             }
         }
-
+ 
         private string _nextPrayer;
         public string NextPrayer
         {
